@@ -8,6 +8,7 @@ app.use(express.static('public')) // Definindo public para arquivos estaticos
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
+const Pergunta =  require('./database/models/Pergunta')
 
 
 //ROTAS
