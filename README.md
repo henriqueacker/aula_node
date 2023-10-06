@@ -26,3 +26,24 @@ app.listen(3000,(error)=>{
 })
 ```
 
+# Sequelize - Utilizado para conexão com banco de dados e manipular os dados
+
+## comando para instalar o Sequelize com mysql
+
+```bash
+npm install sequelize mysql2
+
+```
+
+- Conectando ao banco de dados
+
+```
+const Sequelize = require('sequelize')
+
+const connection = new Sequelize('node', 'root', '',{
+    host: 'localhost',
+    dialect: 'mysql'
+})
+
+module.exports = connection;
+```
