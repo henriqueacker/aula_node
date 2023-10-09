@@ -1,3 +1,6 @@
+//IMPORT DE MODELS E CRIAÇÃO DELAS NO BANCO DE DADOS
+const Pergunta =  require('./database/models/Pergunta')
+
 const connection  = require('./database/database')
 const express = require('express') //import do express
 const app = express(); //iniciando o express
@@ -8,14 +11,18 @@ app.use(express.static('public')) // Definindo public para arquivos estaticos
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
-const Pergunta =  require('./database/models/Pergunta')
 
 
 //ROTAS
 app.get('/', (req, res)=>{
-    let nome = "Teste"
-    res.render('home', {
-        nome
+    Pergunta.findAll({
+        attributes: ['titulo', 'descricao']
+    }).then((response)=>{
+        res.render("layout",{
+            perguntas: response,
+            pageContent: 'home.ejs'
+
+        })
     })
 })
 
@@ -28,7 +35,13 @@ app.get('/perguntar', (req, res)=>{
 app.post('/salvarPergunta', (req, res)=>{
     const titulo = req.body.titulo
     const descricao = req.body.descricao
-    res.send(titulo)
+    Pergunta.create({
+        titulo: titulo,
+        descricao: descricao
+    }).then(()=>{
+        res.redirect('/')
+        
+    })
 })
 
 
