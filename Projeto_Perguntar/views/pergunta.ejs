@@ -1,0 +1,38 @@
+<div class="card mt-5">
+    <div class="card-header">
+        <h3>Pergunta: <%= pergunta.titulo %>
+        </h3>
+    </div>
+    <div class="card-header">
+        <p>
+            <%= pergunta.descricao %>
+        </p>
+    </div>
+    <div class="card-body">
+        <form method="POST" action="/responderPergunta">
+            <input type="hidden" class="text" value='<%= pergunta.id %>' name="id">
+            <label class="mt-1 mb-1">Resposta</label>
+            <textarea placeholder="Descrevar sua resposta" class="form-control" name="resposta"></textarea>
+
+            <button class="btn btn-primary mt-3">Responder</button>
+        </form>
+
+
+    </div>
+    <% if(respostas.length > 0){ %>
+    <div class="d-flex flex-column justify-content-center align-items-center">
+        <span >Respostas</span>
+        <% respostas.forEach(item=> { %>
+            <div class="card m-1">
+                <div class="card-body">
+                    <h3>
+                        <%= item.resposta %>
+                    </h3>
+                </div>
+                
+    
+            </div>
+            <% }); %>
+    </div>
+    <% } %>
+</div>
