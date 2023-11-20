@@ -17,6 +17,6 @@ const Artigo = connection.define("artigos",{
     }
 })
 Artigo.belongsTo(Categoria, { foreignKey: 'id_categoria' })
-Artigo.sync({force: true})
+Artigo.sync({force: false})
 
 module.exports = Artigo
