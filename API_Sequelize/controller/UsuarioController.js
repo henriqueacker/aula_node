@@ -11,7 +11,7 @@ router.post("/login", async(req,res)=>{
             res.status(400).json({error: "Parâmetros inválidos"})
         }
 
-        res.status(200).json({message: "Logado com sucesso"})
+        res.status(200).json({message: "Logado com sucesso" + process.env.JWT_SECRET})
     }catch(error){
         console.error(error)
         res.status(500).send("Error interno no servidor")
