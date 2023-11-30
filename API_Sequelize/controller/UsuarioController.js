@@ -3,6 +3,7 @@ const express = require('express');
 const { criarToken } = require("../utils/token");
 const { hashPassword, comparePasswords } = require("../utils/hash");
 const { auth } = require("../utils/middleware");
+const { enviarEmailNovaSenha } = require("../utils/email");
 const router = express.Router();
 
 
@@ -80,7 +81,8 @@ router.post("/recuperar-senha", async(req,res)=>{
         await user.update({
             senha: hashNewPassowrd
         })
-        
+        await enviarEmailNovaSenha(email, newPassword);
+
         return res.status(200).json({message: "Senha alterada com sucesso, sua nova senha é: "+ newPassword})
 
     }catch(error){
