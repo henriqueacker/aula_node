@@ -10,6 +10,7 @@ function auth(req, res, next){
 
    
     if(authorization){
+        req.loggedUser = authorization
         next()
     }else{
         return res.status(401).json({error: "Token inválido"})
