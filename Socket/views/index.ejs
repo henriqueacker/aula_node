@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Socket</title>
+</head>
+<body>
+   <h1>Chat</h1>
+    <div id="chat">
+
+    </div>
+    <input type="text" id="msg">
+    <input type="text" id="username">
+    <button onclick="enviar()">Enviar</button>
+
+</body>
+
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<script>
+    const  socket = io("http://localhost:3000")
+
+    socket.on("disconnect", (data)=>{
+        console.log('desconectando...')
+    });
+    socket.on("showmsg", (data)=>{
+        console.log(data)
+        let chat = document.getElementById("chat")
+        let  p = document.createElement("p")
+        p.innerHTML = data.username + ": "+ data.msg
+        chat.append(p)
+    });
+
+    function enviar(){
+        let msg = document.getElementById("msg").value
+        let username = document.getElementById("username").value
+        socket.emit("msg", {msg, username})
+    }
+</script>
+
+</html>
