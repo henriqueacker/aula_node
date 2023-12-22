@@ -1,7 +1,15 @@
+import React, {useState, useEffect} from 'react';
+import { Box, Button, Container, FormControl, TextField } from '@mui/material'
 import Head from 'next/head'
 
 
 export default function Home() {
+  const [nome, setNome] = useState();
+
+  function entrar(){
+
+  }
+
   return (
     <>
       <Head>
@@ -10,8 +18,13 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        
+      <main sx={{display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column"}}>
+          <Container maxWidth="lg" component="main">
+            <Box sx={{display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column"}}>
+                <TextField label="Nome" variant="outlined"   />
+                <Button variant="outlined" sx={{marginTop: "5px"}}>Entrar</Button>
+            </Box>
+          </Container>
       </main>
     </>
   )
